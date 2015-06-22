@@ -1,4 +1,7 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <sys/wait.h>
+#include <unistd.h>
 #include "shell.h"
 
 void main()
@@ -8,7 +11,7 @@ void main()
 				cmd_struct *command;
 
 				while (promptLine("sheeeellll >>>> ", &line, &len) > 0) {
-								command = parse_command(
-
+								command = parse_command(line);
+								execvp(command->progname, command->args);
 				}
 }

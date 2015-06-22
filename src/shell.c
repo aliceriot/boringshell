@@ -1,5 +1,10 @@
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 #include "shell.h"
+
+#define MAX_LEN 1000
+#define TOKEN_SEP " \t\n\r"
 
 int promptLine(char *prompt, char **line, size_t *len) {
 				fputs(prompt, stderr);
@@ -20,5 +25,9 @@ cmd_struct* parse_command(char* str) {
 				ret->redirect[0] = ret->redirect[1] = -1;
 				return ret;
 }
-				
+char* next_non_empty(char **line) {
+				char *tok;
+				while ((tok = strsep(line, TOKEN_SEP)) && !*tok);
+				return tok;
+}
 

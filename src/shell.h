@@ -9,3 +9,4 @@ typedef struct {
 
 int promptLine(char *prompt, char **line, size_t *len);
 cmd_struct* parse_command(char* str);
+char* next_non_empty(char **line);
