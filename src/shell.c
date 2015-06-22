@@ -48,7 +48,7 @@ pid_t forkexec(cmd_struct* command) {
 								}
 				} else {  // We are the child. */
 								// exec_with_redir(command, n_pipes, pipes);
-								forkexec(command);
+								execvp(command->progname, command->args);
 								perror("OH DEAR");
 								return 0;
 				}
