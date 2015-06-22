@@ -12,6 +12,6 @@ void main()
 
 				while (promptLine("sheeeellll >>>> ", &line, &len) > 0) {
 								command = parse_command(line);
-								execvp(command->progname, command->args);
+								forkexec(command);
 				}
 }
