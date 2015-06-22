@@ -12,7 +12,7 @@ void main()
 
 				while (promptLine("sheeeellll >>>> ", &line, &len) > 0) {
 								command = parse_command(line);
-								forkexec(command);
+								fork_and_exec_io(command, 
 								wait(NULL);
 				}
 }

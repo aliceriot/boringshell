@@ -34,24 +34,22 @@ char* next_non_empty(char **line) {
 				return tok;
 }
 
-// pid_t forkexec(cmd_struct* command, int n_pipes, int (*pipes)[2]) {
-pid_t forkexec(cmd_struct* command) {
+fork_and_exec_io(cmd_struct *command, int stdout_fd, int stdin_fd) {
 				pid_t child_pid = fork();
-
-				if (child_pid) {  /* We are the parent. */
+				
+				if (child_pid) {
 								switch(child_pid) {
-												case -1:
+												case - 1:
 																fprintf(stderr, "Oh dear.\n");
 																return -1;
 												default:
 																return child_pid;
 								}
-				} else {  // We are the child. */
-								// exec_with_redir(command, n_pipes, pipes);
+				} else if (strcmp(command->progname, "cd") == 0) {
+								chdir(command->args[1]);
+				} else {
 								execvp(command->progname, command->args);
-								perror("OH DEAR");
+								perror("OH NOES");
 								return 0;
 				}
 }
-
-
