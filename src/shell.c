@@ -38,10 +38,7 @@ pid_t run_with_redirect(cmd_struct *command, int n_pipes, int (*pipes)[2])
 {
 				pid_t child_pid = fork();
 				
-				if (strcmp(command->progname, "cd") == 0) {
-								chdir(command->args[1]);
-								return child_pid;
-				} else if  (child_pid) {
+				if (child_pid) {
 								switch(child_pid) {
 												case - 1:
 																fprintf(stderr, "Oh dear.\n");
