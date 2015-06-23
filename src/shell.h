@@ -8,13 +8,14 @@ typedef struct {
 } cmd_struct;
 
 typedef struct {
-				  /** The total number of commands. */
-				  int n_cmds;
-					  /** The commands themselves. */
-					  cmd_struct* cmds[];
+				int n_cmds;
+			  cmd_struct* cmds[];
 } pipeline_struct;
 
 int promptLine(char *prompt, char **line, size_t *len);
 cmd_struct* parse_command(char* str);
 char* next_non_empty(char **line);
-pid_t forkexec(cmd_struct* command);
+pid_t run_with_redirect(cmd_struct *cmd, int npipes, int(*pipes)[2]);
+int exec_with_redirect(cmd_struct *cmd, int npipes, int (*pipes)[2]);
+pipeline_struct* pipe_parse(char *line);
+void close_all_the_pipes(int n_pipes, int (*pipes)[2]);
